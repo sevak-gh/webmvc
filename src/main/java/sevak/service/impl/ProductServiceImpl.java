@@ -32,9 +32,31 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product save(Product product) {
-        products.get(product.getId()).setName(product.getName());
-        products.get(product.getId()).setPrice(product.getPrice());
-        products.get(product.getId()).setDescription(product.getDescription());
+        if (product.getId() == 0) {
+            int id = products.size() + 1;
+            product.setId(id);
+            products.put(id, product);
+        } else {
+            products.get(product.getId()).setName(product.getName());
+            products.get(product.getId()).setPrice(product.getPrice());
+            products.get(product.getId()).setDescription(product.getDescription());
+        }
         return product;
     }        
+    
+    @Override
+    public void delete(int id) {
+        products.remove(id);
+    }
+
+    @Override
+    public List<Product> findByPrice(double price) {
+        List<Product> lst = new ArrayList<Product>();
+        for (Product product : products.values()) {
+            if (Double.compare(product.getPrice(), price) <= 0) {
+                lst.add(product);
+            }
+        }
+        return lst;
+    }
 }

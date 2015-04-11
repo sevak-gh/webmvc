@@ -1,4 +1,5 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"  %>
 
 <html>
 <head>
@@ -31,9 +32,17 @@
                     <td><a href="${pageContext.request.contextPath}/products/${product.id}">${product.name}</a></td>
                     <td>${product.price}</td>
                     <td>${product.description}</td>
+                    <td>
+                        <form:form action="${pageContext.request.contextPath}/products/delete/${product.id}" method="post">
+                            <input type="submit" value="delete"/>
+                        </form:form>
+                    </td>
                 </tr>
             </c:forEach>  
         </table>
+    </div>
+    <div>
+        <a href="${pageContext.request.contextPath}/products/create">add new product</a>    
     </div>
 </body>
 </html>

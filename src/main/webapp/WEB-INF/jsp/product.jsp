@@ -47,6 +47,7 @@
                         <label> description: </label>
                         <form:textarea path="description" />
                     </div>
+                    <form:hidden path="id" />
                     <input  type="submit" value="submit" />
                 </form:form>
            </c:otherwise>

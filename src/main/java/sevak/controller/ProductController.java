@@ -60,4 +60,22 @@ public class ProductController {
     public Product getDataJson(@PathVariable("id") int id) {
         return productService.findById(id);
     }
+
+    @RequestMapping(value="/create", method = RequestMethod.GET)
+    public String getNewProductForm(Model model) {
+        model.addAttribute("product", new Product());
+        return "product";
+    }
+
+    @RequestMapping(value="/create", method = RequestMethod.POST)
+    public String create(@ModelAttribute("product") Product product, BindingResult result) {
+        productService.save(product);
+        return "redirect:/products";
+    }    
+
+    @RequestMapping(value="/delete/{id}", method = RequestMethod.POST)
+    public String create(@PathVariable("id") int id, Model model) {
+        productService.delete(id);
+        return "redirect:/products";
+    }
 }
