@@ -34,7 +34,7 @@
                 </div>
             </c:when>
             <c:otherwise>
-                    <form:form modelAttribute="product">
+                    <form:form modelAttribute="product" enctype="multipart/form-data">
                     <div>
                         <label> name: </label>
                         <form:input path="name" />
@@ -46,6 +46,9 @@
                     <div>
                         <label> description: </label>
                         <form:textarea path="description" />
+                    </div>
+                    <div>
+                        <input type="file" name="image" />
                     </div>
                     <form:hidden path="id" />
                     <input  type="submit" value="submit" />

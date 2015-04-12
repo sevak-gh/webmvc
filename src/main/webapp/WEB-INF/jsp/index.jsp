@@ -1,5 +1,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"  %>
 
 <html>
 <head>
@@ -15,6 +16,11 @@
     </p>        
     <p>
         ${note}
-    </p>        
+    </p>       
+    <form method="POST" enctype="multipart/form-data">
+        <input type="text" name="info" />
+        <input type="file" name="image" />
+        <input type="submit" value="save" />
+    </form> 
 </body>
 </html>
