@@ -13,9 +13,9 @@ public class ProductServiceImpl implements ProductService {
 
     private static Map<Integer, Product> products = new HashMap<Integer, Product>() {
         {
-            put(1, new Product(1, "guitar", 157.56, "stratocatser fender style"));
-            put(2, new Product(2, "piano", 1200.99, "electric piano"));
-            put(3, new Product(3, "violin", 256.5, "wood style"));
+            put(1, new Product(1, "guitar", 157.56, "stratocatser fender style", "guitar.jpeg"));
+            put(2, new Product(2, "piano", 1200.99, "electric piano", "piano.jpeg"));
+            put(3, new Product(3, "violin", 256.5, "wood style", "violin.jpeg"));
         }
     };
 

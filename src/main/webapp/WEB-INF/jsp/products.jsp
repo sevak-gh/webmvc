@@ -32,6 +32,7 @@
                     <td><a href="${pageContext.request.contextPath}/products/${product.id}">${product.name}</a></td>
                     <td>${product.price}</td>
                     <td>${product.description}</td>
+                    <td><img src="<c:url value="/images/${product.imageFileName}"></c:url>"/></td>
                     <td>
                         <form:form action="${pageContext.request.contextPath}/products/delete/${product.id}" method="post">
                             <input type="submit" value="delete"/>

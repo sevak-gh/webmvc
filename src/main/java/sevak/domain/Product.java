@@ -10,16 +10,19 @@ public class Product implements Serializable {
     private String name;
     private double price;
     private String description;
+    private String imageFileName;
 
     public Product() {
     } 
 
     public Product(int id, String name,
-                   double price, String description) {
+                   double price, String description,
+                    String imageFileName) {
         this.id = id;
         this.name = name;
         this.price = price;
-        this.description = description; 
+        this.description = description;
+        this.imageFileName = imageFileName;
     }
 
     public int getId() {
@@ -53,6 +56,14 @@ public class Product implements Serializable {
    public void setDescription(String description) {
        this.description = description;
    }     
+
+    public String getImageFileName() {
+        return imageFileName;
+    }
+
+    public void setImageFileName(String imageFileName) {
+        this.imageFileName = imageFileName;
+    }
 
    @Override
    public boolean equals(Object other) {
