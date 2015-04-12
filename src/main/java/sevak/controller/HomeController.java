@@ -1,5 +1,8 @@
 package sevak.controller;
 
+import sevak.exception.CustomException;
+import sevak.exception.MyException;
+
 import java.util.Map;
 import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
@@ -36,8 +39,14 @@ public class HomeController {
     //public String error(Model model) throws HttpMediaTypeNotAcceptableException {
     public String error(Model model) {
         //throw new HttpMediaTypeNotAcceptableException("oh my god!!!");
-        throw new RuntimeException("oh my god!!!");
+        //throw new RuntimeException("oh my god!!!");
+        throw new CustomException("oh my god!!!");
         //return "error page";
+    }
+
+    @RequestMapping(value="/rre", method = RequestMethod.GET)
+    public void rre() {
+        throw new MyException("oh my goodness!!!");
     }
 
     @RequestMapping(value="/what", method = RequestMethod.GET)
@@ -67,8 +76,8 @@ public class HomeController {
         return map;
     }
 
-    @ExceptionHandler(RuntimeException.class)
-    public ModelAndView handleError(HttpServletRequest request, RuntimeException e) {
+    @ExceptionHandler(CustomException.class)
+    public ModelAndView handleError(HttpServletRequest request, CustomException e) {
         ModelAndView model = new ModelAndView("error");
         model.addObject("e", e);
         return model;
