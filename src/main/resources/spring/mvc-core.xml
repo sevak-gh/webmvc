@@ -25,6 +25,13 @@
     
     <mvc:resources mapping="/images/**" location="/images/" />
 
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/products" />
+            <bean class="sevak.interceptor.AuditingInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>    
+
     <bean id= "messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="basename" value="messages"/> 
     </bean>

@@ -1,5 +1,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"  %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <html>
 <head>
@@ -29,7 +30,8 @@
             </tr>
             <c:forEach items="${products}" var="product">
                 <tr>
-                    <td><a href="${pageContext.request.contextPath}/products/${product.id}">${product.name}</a></td>
+                    <%--<td><a href="${pageContext.request.contextPath}/products/${product.id}">${product.name}</a></td>--%>
+                    <td><a href="<spring:url value="/products/${product.id}" />">${product.name}</a></td>
                     <td>${product.price}</td>
                     <td>${product.description}</td>
                     <td><img src="<c:url value="/images/${product.imageFileName}"></c:url>"/></td>
