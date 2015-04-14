@@ -26,6 +26,10 @@
     <mvc:resources mapping="/images/**" location="/images/" />
 
     <mvc:interceptors>
+        <bean class= "org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+            <property name="paramName" value="language"/>
+        </bean>
+
         <mvc:interceptor>
             <mvc:mapping path="/products" />
             <bean class="sevak.interceptor.AuditingInterceptor" />
@@ -71,6 +75,10 @@
         <property name="prefix" value="/WEB-INF/jsp/"/>
         <property name="suffix" value=".jsp"/>
     </bean>    
+
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+        <property name="defaultLocale" value="en"/>
+    </bean>
 
 </beans>
 

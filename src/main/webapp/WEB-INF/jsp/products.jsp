@@ -19,6 +19,9 @@
 </head>
 <body>
     <div>
+        <spring:message code="label.welcome" />
+    </div>
+    <div>
         All products list
     </div>
     <div>
