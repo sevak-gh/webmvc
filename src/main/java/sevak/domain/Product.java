@@ -1,7 +1,15 @@
 package sevak.domain;
 
+import sevak.validator.Even;
+
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.validation.constraints.Size;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @XmlRootElement
 public class Product implements Serializable {
@@ -33,6 +41,7 @@ public class Product implements Serializable {
         this.id = id;
     }
 
+    @Size(min=2, max=10, message="{Size.product.name}")
     public String getName() {
         return name;
     }
@@ -41,6 +50,9 @@ public class Product implements Serializable {
         this.name = name;
     }
 
+   @Min(value=0, message="{Min.product.price}") 
+   @Max(value=5000, message="{Max.product.price}")
+   @Even 
    public double getPrice() {
        return price;
    } 
@@ -49,6 +61,7 @@ public class Product implements Serializable {
        this.price = price;
    }
 
+   @NotEmpty(message="desc may not be null") 
    public String getDescription() {
        return description;
    }

@@ -32,5 +32,8 @@
         <input type="file" name="image" />
         <input type="submit" value="save" />
     </form> 
+    <div>
+        <a href="<c:url value="/products" />">products list</a>
+    </div>
 </body>
 </html>

@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=utf-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"  %>
 
@@ -13,6 +14,12 @@
 
     th,td {
         padding: 15px;
+    }
+
+    .error {
+        color: #ff0000;
+        font-style: italic;
+        font-weight: bold;
     }
 </style>
 </head>
@@ -36,16 +43,22 @@
             <c:otherwise>
                     <form:form modelAttribute="product" enctype="multipart/form-data">
                     <div>
+                        <form:errors path="*" cssClass="error" />
+                    </div>                        
+                    <div>
                         <label> name: </label>
                         <form:input path="name" />
+                        <form:errors path="name" cssClass="error"/>
                     </div>
                     <div>
                         <label> price: </label>
                         <form:input path="price" />
+                        <form:errors path="price" cssClass="error"/>
                     </div>
                     <div>
                         <label> description: </label>
                         <form:textarea path="description" />
+                        <form:errors path="description" cssClass="error"/>
                     </div>
                     <div>
                         <input type="file" name="image" />

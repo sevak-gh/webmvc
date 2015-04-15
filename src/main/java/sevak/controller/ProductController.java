@@ -6,6 +6,7 @@ import sevak.domain.Product;
 import java.io.IOException;
 import java.io.File;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -75,8 +76,12 @@ public class ProductController {
 
     @RequestMapping(value="/create", method = RequestMethod.POST)
     public String create(@RequestParam("image") MultipartFile image, 
-                         @ModelAttribute("product") Product product, BindingResult result, 
+                         @ModelAttribute("product") @Valid Product product, BindingResult result, 
                          HttpServletRequest request) {
+
+        if (result.hasErrors()) {
+            return "product";
+        }
 
         // save image
         if ((image != null) && !image.isEmpty()) {        
