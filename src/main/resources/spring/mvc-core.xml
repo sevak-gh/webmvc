@@ -19,7 +19,7 @@
        http://jax-ws.dev.java.net/spring/servlet
        http://jax-ws.dev.java.net/spring/servlet.xsd">
 
-    <context:component-scan base-package="sevak.controller"/>
+    <context:component-scan base-package="sevak.controller, sevak.validator"/>
 
     <mvc:annotation-driven />
     

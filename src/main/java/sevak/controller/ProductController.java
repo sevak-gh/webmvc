@@ -2,6 +2,7 @@ package sevak.controller;
 
 import sevak.service.ProductService;
 import sevak.domain.Product;
+import sevak.validator.ProductValidator;
 
 import java.io.IOException;
 import java.io.File;
@@ -25,10 +26,12 @@ import org.springframework.web.multipart.MultipartFile;
 public class ProductController {
 
     private final ProductService productService;
+    private final ProductValidator productValidator;
 
     @Autowired
-    public ProductController(ProductService productService) {
+    public ProductController(ProductService productService, ProductValidator productValidator) {
         this.productService = productService;
+        this.productValidator = productValidator;
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -48,11 +51,17 @@ public class ProductController {
     }
 
     @RequestMapping(value="/{id}", method = RequestMethod.POST)
-    public String get(@ModelAttribute("product") Product product, BindingResult result) {
-        // TODO validation later
+    public String get(@ModelAttribute("product") @Valid Product product, BindingResult result) {
 
-        productService.save(product);        
+        // apply custom validator
+        productValidator.validate(product, result);
+
+        if (result.hasErrors()) {
+            return "product";
+        }
     
+        productService.save(product);        
+
         return "redirect:/products";
     }
 
@@ -78,6 +87,9 @@ public class ProductController {
     public String create(@RequestParam("image") MultipartFile image, 
                          @ModelAttribute("product") @Valid Product product, BindingResult result, 
                          HttpServletRequest request) {
+
+        // apply custom validator
+        productValidator.validate(product, result);
 
         if (result.hasErrors()) {
             return "product";

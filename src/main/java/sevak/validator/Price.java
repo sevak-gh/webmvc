@@ -10,12 +10,12 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
  
 @Documented
-@Constraint(validatedBy = EvenValidator.class)
+@Constraint(validatedBy = PriceValidator.class)
 @Target( { ElementType.METHOD, ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Even {
+public @interface Price {
 
-    String message() default "not even value";
+    String message() default "invalid price";
       
     Class<?>[] groups() default {};
       

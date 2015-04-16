@@ -1,6 +1,6 @@
 package sevak.domain;
 
-import sevak.validator.Even;
+import sevak.validator.Price;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -10,6 +10,8 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.NumberFormat;
+import org.springframework.format.annotation.NumberFormat.Style;
 
 @XmlRootElement
 public class Product implements Serializable {
@@ -50,9 +52,11 @@ public class Product implements Serializable {
         this.name = name;
     }
 
-   @Min(value=0, message="{Min.product.price}") 
-   @Max(value=5000, message="{Max.product.price}")
-   @Even 
+   //@Min(value=0, message="{Min.product.price}") 
+   //@Max(value=5000, message="{Max.product.price}")
+   @Price 
+   //@NumberFormat(style=Style.CURRENCY) 
+   @NumberFormat(style=Style.NUMBER, pattern="###,###.##") 
    public double getPrice() {
        return price;
    } 
