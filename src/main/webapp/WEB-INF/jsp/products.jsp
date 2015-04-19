@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=utf-8" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"  %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
@@ -40,9 +40,14 @@
                     <td>${product.description}</td>
                     <td><img src="<c:url value="/images/${product.imageFileName}"></c:url>"/></td>
                     <td>
-                        <form:form action="${pageContext.request.contextPath}/products/delete/${product.id}" method="post">
+                        <form action="${pageContext.request.contextPath}/products/delete/${product.id}" method="post">
                             <input type="submit" value="delete"/>
-                        </form:form>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="<spring:url value="/cart/add/${product.id}"/>" method="post">
+                            <input type="submit" value="AddToCart"/>
+                        </form>                       
                     </td>
                 </tr>
             </c:forEach>  

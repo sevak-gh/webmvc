@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
+import java.math.BigDecimal;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,9 +14,9 @@ public class ProductServiceImpl implements ProductService {
 
     private static Map<Integer, Product> products = new HashMap<Integer, Product>() {
         {
-            put(1, new Product(1, "guitar", 157.56, "stratocatser fender style", "guitar.jpeg"));
-            put(2, new Product(2, "piano", 1200.99, "electric piano", "piano.jpeg"));
-            put(3, new Product(3, "violin", 256.5, "wood style", "violin.jpeg"));
+            put(1, new Product(1, "guitar", BigDecimal.valueOf(157.56), "stratocatser fender style", "guitar.jpeg"));
+            put(2, new Product(2, "piano", BigDecimal.valueOf(1200.99), "electric piano", "piano.jpeg"));
+            put(3, new Product(3, "violin", BigDecimal.valueOf(256.5), "wood style", "violin.jpeg"));
         }
     };
 
@@ -50,10 +51,10 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> findByPrice(double price) {
+    public List<Product> findByPrice(BigDecimal price) {
         List<Product> lst = new ArrayList<Product>();
         for (Product product : products.values()) {
-            if (Double.compare(product.getPrice(), price) <= 0) {
+            if (price.compareTo(product.getPrice()) <= 0) {
                 lst.add(product);
             }
         }

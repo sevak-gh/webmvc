@@ -2,6 +2,7 @@ package sevak.domain;
 
 import sevak.validator.Price;
 
+import java.math.BigDecimal;
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.validation.constraints.Size;
@@ -18,7 +19,7 @@ public class Product implements Serializable {
     
     private int id;
     private String name;
-    private double price;
+    private BigDecimal price;
     private String description;
     private String imageFileName;
 
@@ -26,7 +27,7 @@ public class Product implements Serializable {
     } 
 
     public Product(int id, String name,
-                   double price, String description,
+                   BigDecimal price, String description,
                     String imageFileName) {
         this.id = id;
         this.name = name;
@@ -57,11 +58,11 @@ public class Product implements Serializable {
    @Price 
    //@NumberFormat(style=Style.CURRENCY) 
    @NumberFormat(style=Style.NUMBER, pattern="###,###.##") 
-   public double getPrice() {
+   public BigDecimal getPrice() {
        return price;
    } 
 
-   public void setPrice(double price) {
+   public void setPrice(BigDecimal price) {
        this.price = price;
    }
 
@@ -102,13 +103,13 @@ public class Product implements Serializable {
        int hash = 7;
        hash = hash * 17 + id;
        hash = hash * 17 + name.hashCode();
-       hash = hash * 17 + new Double(price).hashCode();
+       hash = hash * 17 + price.hashCode();
        hash = hash * 17 + description.hashCode();	 
        return hash;
    }
 
    @Override
    public String toString() {
-        return String.format("product[id:%d,name:%s,price:%f]", id, name, price);
+        return String.format("product[id:%d,name:%s,price:%s]", id, name, price);
    }
 }

@@ -6,6 +6,8 @@ import sevak.exception.MyException;
 import java.util.Map;
 import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,9 +29,10 @@ public class HomeController {
     }
 
     @RequestMapping(value="/welcome", method = RequestMethod.GET)
-    public ModelAndView welcome() {
+    public ModelAndView welcome(HttpSession session) {
         ModelAndView model = new ModelAndView();
         model.addObject("message", "this is my home page");
+        model.addObject("id", session.getId());
         model.setViewName("index");
         return model;
     }

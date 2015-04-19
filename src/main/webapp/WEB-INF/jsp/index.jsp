@@ -11,7 +11,7 @@
 <body>
     <div>
         <a href=?language=en>English</a>|<a href="?language=fr">French</a>
-    </div>
+    </div>    
     <div>
         վհպրբսեզքշբը
     </div>
@@ -26,7 +26,10 @@
     </p>        
     <p>
         ${note}
-    </p>       
+    </p>  
+    <p>
+        ${id}
+    </p>     
     <form method="POST" enctype="multipart/form-data">
         <input type="text" name="info" />
         <input type="file" name="image" />
