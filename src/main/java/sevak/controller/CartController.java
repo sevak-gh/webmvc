@@ -12,17 +12,32 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.ui.Model;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Controller
 @RequestMapping("/cart")
 @SessionAttributes("cart")
 public class CartController {
-    
+
+    private static final Logger LOG = LoggerFactory.getLogger(CartController.class);  
+
     private final ProductService productService;
 
     @Autowired
     public CartController(ProductService productService) {
         this.productService = productService;
+    }
+
+    @ModelAttribute("cart")
+    public Cart initCart() {
+        return new Cart();
+    }
+
+    @RequestMapping(method=RequestMethod.GET)
+    public String get(Model model) {
+        return "cart";
     }
 
     @RequestMapping(value="/add/{productId}", method=RequestMethod.POST)

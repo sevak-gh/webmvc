@@ -14,7 +14,28 @@
 </head>
 <body>
     <div class="container">
-        ${cart.totalPrice}
+    <table class="table-condensed table-bordered">
+        <tr>
+            <th>product</th>
+            <th>price</th>
+            <th>quantity</th>
+            <th>total price</th>
+        </tr>
+        <c:forEach items="${cart.items}" var="item">
+            <tr>
+                <td>${item.product.name}</td>
+                <td>${item.product.price}</td>
+                <td>${item.quantity}</td>
+                <td>${item.totalPrice}</td>
+            </tr>
+        </c:forEach>
+        <tr>
+            <th></th>
+            <th></th>
+            <th>Grand Total</th>
+            <th>${cart.totalPrice}</th>
+        </tr>
+   </table>
     </div>
 </body>
 </html>

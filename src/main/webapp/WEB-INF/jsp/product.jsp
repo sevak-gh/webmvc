@@ -47,14 +47,14 @@
             </c:when>
             <c:otherwise>
                     <form:form modelAttribute="product" enctype="multipart/form-data" class="form-horizontal">
-                        <form:hidden path="id" />
+                        <%--<form:hidden path="id" />--%>
                         <fieldset>
                             <legend>add new product</legend>
                             <form:errors path="*" cssClass="alert alert-danger" element="div"/>
                             <div class="form-group">
                                 <label class="control-label col-sm-2">name: </label>
                                 <div class="col-sm-10">
-                                    <form:input path="name" class="form-control" />
+                                   <form:input path="name" class="form-control" />
                                     <form:errors path="name" cssClass="text-danger"/>
                                 </div>
                             </div>

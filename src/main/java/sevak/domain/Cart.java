@@ -2,18 +2,15 @@ package sevak.domain;
 
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Collection;
 import java.math.BigDecimal;
 
 public class Cart {
 
     private Map<Integer, CartItem> items = new HashMap<Integer, CartItem>();
 
-    public Map<Integer, CartItem> getItems() {
-        return items;
-    }
-
-    public void setItems(HashMap<Integer, CartItem> items) {
-        this.items = items;
+    public Collection<CartItem> getItems() {
+        return items.values();
     }
 
     public void addCartItem(CartItem item) {
@@ -32,7 +29,7 @@ public class Cart {
     public BigDecimal getTotalPrice() {
         BigDecimal total = new BigDecimal(0);
         for (CartItem item : items.values()) {
-            total.add(item.getTotalPrice()); 
+            total = total.add(item.getTotalPrice()); 
         }
         return total;
     }
