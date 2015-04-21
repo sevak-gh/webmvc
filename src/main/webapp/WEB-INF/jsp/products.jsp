@@ -56,5 +56,8 @@
     <div>
         <a href="${pageContext.request.contextPath}/products/create">add new product</a>    
     </div>
+    <div>
+        <a href="<c:url value="/cart" />">view shopping cart</a>    
+    <div>
 </body>
 </html>

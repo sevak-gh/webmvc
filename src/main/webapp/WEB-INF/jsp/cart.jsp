@@ -14,7 +14,7 @@
 </head>
 <body>
     <div class="container">
-    <table class="table-condensed table-bordered">
+    <table class="table-bordered">
         <tr>
             <th>product</th>
             <th>price</th>
@@ -27,6 +27,13 @@
                 <td>${item.product.price}</td>
                 <td>${item.quantity}</td>
                 <td>${item.totalPrice}</td>
+                <td>
+                    <form action="<c:url value="/cart/remove/${item.product.id}"/>" method="POST" class="form-horizontal">
+                        <div class="form-group">
+                            <input type="submit" value="remove" class="btn" />
+                        </div>
+                    </form>                
+                </td>
             </tr>
         </c:forEach>
         <tr>
@@ -36,6 +43,18 @@
             <th>${cart.totalPrice}</th>
         </tr>
    </table>
+   </div>
+    <br/>
+    <br/>
+    <div class="container">
+        <a href="<c:url value="/products"/>">continue shopping</a> 
+    </div>
+    <div class="container">
+        <form action="<c:url value="/cart"/>" method="POST" class="form-horizontal">
+            <div class="form-group">
+                <input type="submit" value="do my shopping" class="btn" />
+            </div>
+        </form> 
     </div>
 </body>
 </html>

@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,6 +42,11 @@ public class CartController {
         return "cart";
     }
 
+    @RequestMapping(value="shoppingCompleted", method=RequestMethod.GET)
+    public String shoppingCompleted(Model model) {
+        return "shoppingDone";
+    }
+
     @RequestMapping(value="/add/{productId}", method=RequestMethod.POST)
     public String add(@PathVariable("productId") int id, @ModelAttribute("cart") Cart cart) {
         Product product = productService.findById(id);
@@ -47,6 +54,19 @@ public class CartController {
         item.setProduct(product);
         item.setQuantity(1);
         cart.addCartItem(item);
-        return "cart";
+        return "redirect:/cart";
     }
+
+    @RequestMapping(value="/remove/{productId}", method=RequestMethod.POST)
+    public String remove(@PathVariable("productId") int id, @ModelAttribute("cart") Cart cart) {
+        cart.removeCartItem(id);
+        return "redirect:/cart";
+    }
+
+    @RequestMapping(method=RequestMethod.POST)
+    public String processShopping(@ModelAttribute("cart") Cart cart, BindingResult result, SessionStatus status) {
+        // TODO: to be completed
+        status.setComplete();
+        return "redirect:/cart/shoppingCompleted";
+    } 
 }

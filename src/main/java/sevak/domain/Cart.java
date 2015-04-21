@@ -22,8 +22,8 @@ public class Cart {
         }
     }
 
-    public void removeCartItem(CartItem item) {
-        items.remove(item.getProduct().getId());
+    public void removeCartItem(int productId) {
+        items.remove(productId);
     }
 
     public BigDecimal getTotalPrice() {
