@@ -19,10 +19,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.HttpMediaTypeNotAcceptableException;
 
 @Controller
-@RequestMapping("")
 public class HomeController {
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value="/", method = RequestMethod.GET)
     public String printWelcome(Model model) {
         model.addAttribute("message", "this is my home page");
         return "forward:/forward";
@@ -85,10 +84,11 @@ public class HomeController {
         model.addObject("e", e);
         return model;
     }
-
+/*
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
     public String processInfo(@RequestParam("info") String param) {
         return "your message: " + param;
     }
+*/
 }
