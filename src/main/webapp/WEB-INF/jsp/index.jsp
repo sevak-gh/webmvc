@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"  %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html>
 <html>
@@ -29,7 +30,15 @@
                 </form> 
             </p>
         </c:if>
-    </div>
+             <p>
+                <sec:authorize access="isRememberMe()">
+                    <h3># This user is login by "Remember Me Cookies".</h3>
+                </sec:authorize> 
+                <sec:authorize access="isFullyAuthenticated()">
+                    <h3># This user is login by username / password.</h3>
+                </sec:authorize>
+            </p>
+   </div>
     <div dir="rtl">
         سلام بر تمام مهندسین نرم افزار
     </div>
