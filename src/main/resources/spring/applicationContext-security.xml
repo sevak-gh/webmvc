@@ -44,11 +44,16 @@
     <security:authentication-manager>
         <security:authentication-provider>
             <security:password-encoder hash="bcrypt" />
-            <security:user-service>
+            <!--<security:user-service> -->
                 <!-- <security:user name="Admin" password="Admin123" authorities="ROLE_ADMIN" /> -->
-                <security:user name="Admin" password="$2a$10$cJ8V4.8YPtuWJOeAymLIxekgSQLUvlgwEKR3NrlA3pnz8APcRYlc2" authorities="ROLE_ADMIN" />
-                <security:user name="User" password="$2a$10$cJ8V4.8YPtuWJOeAymLIxekgSQLUvlgwEKR3NrlA3pnz8APcRYlc2" authorities="ROLE_USER" />
-            </security:user-service>
+                <!--<security:user name="Admin" password="$2a$10$cJ8V4.8YPtuWJOeAymLIxekgSQLUvlgwEKR3NrlA3pnz8APcRYlc2" authorities="ROLE_ADMIN" />-->
+                <!--<security:user name="User" password="$2a$10$cJ8V4.8YPtuWJOeAymLIxekgSQLUvlgwEKR3NrlA3pnz8APcRYlc2" authorities="ROLE_USER" />-->
+            <!--</security:user-service>-->
+            <security:jdbc-user-service data-source-ref="mdataSource"
+                                        users-by-username-query=
+                                        "select username,password,enabled from user where username=?"
+                                        authorities-by-username-query=
+                                        "select u.username, r.role from user_role as r inner join user as u on u.id=r.fk_user where u.username =?" />
         </security:authentication-provider>
     </security:authentication-manager>
 </beans>
