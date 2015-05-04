@@ -13,15 +13,17 @@
 
     <security:http auto-config="false" use-expressions="true">
 
-        <security:intercept-url pattern="/signin*" access="isAnonymous()" />
-        <security:intercept-url pattern="/welcome*" access="isAnonymous()" />
+        <security:intercept-url pattern="/signin*" access="permitAll" />
+        <security:intercept-url pattern="/signout*" access="permitAll" />
+        <security:intercept-url pattern="/welcome*" access="permitAll" />
         <!--<security:intercept-url pattern="/**" access="isAuthenticated()" />-->
-        <security:intercept-url pattern="/**" access="hasRole('USER')" />
+        <security:intercept-url pattern="/**" access="hasRole('ADMIN')" />
         
         <security:form-login login-page="/signin" 
                default-target-url="/welcome"
                username-parameter="username" 
                password-parameter="password"   
+               authentication-success-handler-ref="savedRequestAwareAuthenticationSuccessHandler"
                authentication-failure-url="/signin?error"/>
         <security:logout logout-success-url="/signout" delete-cookies="JSESSIONID,remember-me-cookie" />
 
@@ -32,7 +34,13 @@
                               remember-me-cookie="remember-me-cookie" />
 
     </security:http>
-    
+
+   <!-- If request parameter "targetUrl" is existed, then forward to this url --> 
+   <bean id="savedRequestAwareAuthenticationSuccessHandler"
+        class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">
+        <property name="targetUrlParameter" value="targetUrl" />
+    </bean>
+        
     <security:authentication-manager>
         <security:authentication-provider>
             <security:password-encoder hash="bcrypt" />

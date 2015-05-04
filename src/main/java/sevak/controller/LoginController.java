@@ -15,6 +15,7 @@ public class LoginController {
         if (error != null) {
             model.addAttribute("error", "true");
         }
+        model.addAttribute("targetUrl", "/err");
         return "login";
     }
 

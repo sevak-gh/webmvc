@@ -37,12 +37,18 @@
                         <spring:message code="login.logout"/><br />
                     </div>
                 </c:if>
-                   <form action="<c:url value="/login"></c:url>" method="post" class="form-horizontal">
+                <c:if test="${passwordOnly}">
+                    <c:set var="readonly" value="readonly"/>
+                </c:if>
+                <c:if test="${rememberMe}">
+                    <c:set var="rememberMeValue" value="checked"/>
+                </c:if>
+                   <form action="<c:url value="/login?targetUrl=${targetUrl}"></c:url>" method="post" class="form-horizontal">
                         <fieldset>
                         <div class="form-group">
-                           <label class="control-label col-sm-2">username: </label>
+                           <label class="control-label col-sm-2" ${readonly}>username: </label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" name="username" type="text">
+                                    <input class="form-control" name="username" type="text" value="${username}" ${readonly}>
                                 </div>
                         </div>
                         <div class="form-group">
@@ -52,9 +58,9 @@
                                 </div>
                         </div>
                         <div class="form-group">
-                           <label class="control-label col-sm-2">remember me: </label>
+                           <label class="control-label col-sm-2" ${readonly}>remember me: </label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" name="remember-me-param" type="checkbox">
+                                    <input class="form-control" name="remember-me-param" type="checkbox" ${rememberMeValue} ${readonly}>
                                 </div>
                        </div>
                        <div class="form-group">

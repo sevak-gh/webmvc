@@ -21,10 +21,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.authentication.RememberMeAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Controller
 @RequestMapping("/products")
 public class ProductController {
+
+    private static final Logger LOG = LoggerFactory.getLogger(ProductController.class);
 
     private final ProductService productService;
     private final ProductValidator productValidator;
@@ -80,6 +88,12 @@ public class ProductController {
 
     @RequestMapping(value="/create", method = RequestMethod.GET)
     public String getNewProductForm(Model model) {
+        if (isRememberMeAuthentication()) {
+            model.addAttribute("passwordOnly", true);
+            model.addAttribute("username", getUsername());
+            model.addAttribute("rememberMe", true);
+            return "login";
+        }
         model.addAttribute("product", new Product());
         return "product";
     }
@@ -116,5 +130,31 @@ public class ProductController {
     public String create(@PathVariable("id") int id, Model model) {
         productService.delete(id);
         return "redirect:/products";
+    }
+
+    private boolean isRememberMeAuthentication() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null) {
+            return false;
+        }
+        
+        return RememberMeAuthenticationToken.class.isAssignableFrom(authentication.getClass());
+    }
+
+    private String getUsername() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null) {
+            return null;
+        }
+
+        Object principal = authentication.getPrincipal();
+
+        if (!(principal instanceof UserDetails)) {
+            LOG.debug("getting username through principal");
+            return principal.toString();
+        }
+
+        LOG.debug("getting username through UserDetails");
+        return ((UserDetails)principal).getUsername();
     }
 }
