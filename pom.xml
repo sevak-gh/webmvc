@@ -29,7 +29,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <!-- spring -->
-        <spring.version>4.1.1.RELEASE</spring.version>
+        <spring.version>5.2.20.RELEASE</spring.version>
         <jaxws-spring.version>1.9</jaxws-spring.version>
         <spring.security.version>4.0.0.RELEASE</spring.security.version>
 
